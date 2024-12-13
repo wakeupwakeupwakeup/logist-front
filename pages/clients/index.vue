@@ -97,7 +97,18 @@ async function handleFile(event: Event) {
   <div>
     <div class="flex gap-4 justify-between mb-8">
       <h1>Клиенты</h1>
-      <UInput type="file" @change="handleFile" />
+      <div class="flex items-center gap-2">
+        <UPopover mode="hover">
+          <UIcon name="i-lucide-info" />
+          <template #content>
+            <p class="p-2">
+              При загрузке клиента из таблицы (.xls), укажите наименование
+              клиента в названии листа
+            </p>
+          </template>
+        </UPopover>
+        <UInput type="file" @change="handleFile" />
+      </div>
     </div>
     <UTable
       :data="state.data"

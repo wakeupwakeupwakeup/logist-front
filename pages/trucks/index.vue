@@ -13,19 +13,25 @@ type Schema = z.output<typeof schema>;
 const formState = reactive<Partial<Schema>>({
   number: undefined,
 });
-const { state: trucks } = useTrucks();
+const { state: trucks, refresh } = useTrucks();
 const router = useRouter();
 
-function onSubmit(event: FormSubmitEvent<Schema>) {
-  const { mutate } = useCreateTuck();
-  mutate(event.data);
+async function onSubmit(event: FormSubmitEvent<Schema>) {
+  const { mutateAsync } = useCreateTuck();
+  try {
+    await mutateAsync(event.data);
+    refresh();
+  } catch (e) {
+    console.error(e);
+  }
 }
+
 const form = useTemplateRef("form");
 </script>
 
 <template>
   <div>
-    <div class="flex gap-4 justify-between mb-8">
+    <div class="flex gap-4 items-center justify-between mb-8">
       <div class="flex gap-4 items-end">
         <h1>Машины</h1>
         <UIcon
@@ -56,12 +62,10 @@ const form = useTemplateRef("form");
       <UCard
         v-for="truck in trucks.data"
         :key="truck.id"
-        :ui="{ root: 'bg-[$000]', body: 'sm:p-0 p-0' }"
+        :ui="{ root: 'bg-[$000] cursor-pointer' }"
+        @click="router.push(`/trucks/${truck.id}`)"
       >
-        <div class="flex gap-8 pl-4 pt-4">
-          <span class="text-2xl font-medium">{{ truck.number }}</span>
-          <img src="/img/truck.png" class="h-48 scale-x-[-1]" />
-        </div>
+        <span class="text-2xl font-medium">{{ truck.number }}</span>
       </UCard>
     </div>
   </div>

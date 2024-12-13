@@ -16,7 +16,7 @@ definePageMeta({
 });
 
 const { state: trucks } = useTrucks();
-const { state: client } = useClient();
+const { state: client, refresh } = useClient();
 const open = ref(false);
 const selectedAddress = ref<number | null>(null);
 
@@ -97,9 +97,15 @@ async function onSubmit(event: FormSubmitEvent<any>) {
   console.log(selectedAddress);
 
   console.log(event.data);
+  const { mutateAsync } = useAttachTruck();
+
   try {
-    const { mutate } = useAttachTruck();
-    mutate({ addressId: selectedAddress.value, truckId: event.data.number });
+    await mutateAsync({
+      addressId: selectedAddress.value,
+      truckId: event.data.number,
+    });
+    refresh();
+    open.value = false;
   } catch (e) {
     console.error(e);
   }
@@ -109,7 +115,7 @@ const form = useTemplateRef("form");
 
 <template>
   <div>
-    <div class="flex gap-4 justify-between items-center">
+    <div class="flex gap-4 justify-between items-center mb-8">
       <h1>{{ client.data?.name }}</h1>
       <UBreadcrumb
         :items="[
@@ -119,6 +125,7 @@ const form = useTemplateRef("form");
       />
     </div>
     <UTable
+      :sorting="[{ id: 'truck', desc: true }]"
       :data="client.data?.addresses"
       :columns="columns"
       :loading="client.status === 'pending'"
