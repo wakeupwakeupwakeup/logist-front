@@ -1,4 +1,5 @@
 import type { TTruck } from "~/types/truck";
+import { defineMutation, useMutation } from "@pinia/colada";
 
 export const useCreateTuck = defineMutation(() => {
   const {
