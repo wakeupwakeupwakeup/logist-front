@@ -7,10 +7,6 @@ import { z } from "zod";
 const UButton = resolveComponent("UButton");
 const UDropdownMenu = resolveComponent("UDropdownMenu");
 
-const {
-  public: { apiBase },
-} = useRuntimeConfig();
-
 definePageMeta({
   layout: "user",
 });
@@ -101,7 +97,7 @@ async function onSubmit(event: FormSubmitEvent<any>) {
 
   try {
     await mutateAsync({
-      addressId: selectedAddress.value,
+      addressId: selectedAddress.value!,
       truckId: event.data.number,
     });
     refresh();
@@ -117,12 +113,6 @@ const form = useTemplateRef("form");
   <div>
     <div class="flex gap-4 justify-between items-center mb-8">
       <h1>{{ client.data?.name }}</h1>
-      <UBreadcrumb
-        :items="[
-          { label: 'Клиенты', to: '/clients' },
-          { label: client.data?.name },
-        ]"
-      />
     </div>
     <UTable
       :sorting="[{ id: 'truck', desc: true }]"

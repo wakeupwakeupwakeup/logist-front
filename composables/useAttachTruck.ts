@@ -5,15 +5,25 @@ export const useAttachTruck = defineMutation(() => {
 
   const mutation = useMutation({
     mutation: ({
-      addressId,
+      target,
+      targetId,
       truckId,
     }: {
-      addressId: number;
+      target: "address" | "driver";
+      targetId: number;
       truckId: number;
-    }) =>
-      $fetch(apiBase + `/addresses/${addressId}/truck/${truckId}`, {
-        method: "POST",
-      }),
+    }) => {
+      switch (target) {
+        case "address":
+          return $fetch(apiBase + `/addresses/${targetId}/truck/${truckId}`, {
+            method: "POST",
+          });
+        case "driver":
+          return $fetch(apiBase + `/drivers/${targetId}/truck/${truckId}`, {
+            method: "PATCH",
+          });
+      }
+    },
   });
 
   return mutation;

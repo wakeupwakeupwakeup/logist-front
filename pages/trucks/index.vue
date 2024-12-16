@@ -62,7 +62,7 @@ const form = useTemplateRef("form");
       <UCard
         v-for="truck in trucks.data"
         :key="truck.id"
-        :ui="{ root: 'bg-[$000] cursor-pointer' }"
+        :ui="{ root: 'cursor-pointer' }"
         @click="router.push(`/trucks/${truck.id}`)"
       >
         <span class="text-2xl font-medium">{{ truck.number }}</span>

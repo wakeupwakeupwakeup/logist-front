@@ -107,7 +107,7 @@ async function handleFile(event: Event) {
             </p>
           </template>
         </UPopover>
-        <UInput type="file" @change="handleFile" />
+        <UInput type="file" accept=".xlsx" @change="handleFile" />
       </div>
     </div>
     <UTable

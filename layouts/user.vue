@@ -8,6 +8,10 @@ const items = ref([
     label: "Клиенты",
     to: "/clients",
   },
+  {
+    label: "Водители",
+    to: "/drivers",
+  },
 ]);
 </script>
 
@@ -18,7 +22,7 @@ const items = ref([
         <UNavigationMenu :items="items" />
       </UContainer>
     </header>
-    <main>
+    <main class="mt-8">
       <UContainer>
         <slot />
       </UContainer>
