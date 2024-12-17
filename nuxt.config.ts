@@ -12,7 +12,7 @@ export default defineNuxtConfig({
   pages: true,
   runtimeConfig: {
     public: {
-      apiBase: "http://3954187-dm33703.twc1.net",
+      apiBase: "https://3954187-dm33703.twc1.net",
     },
   },
 
