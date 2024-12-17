@@ -98,7 +98,13 @@ const openDeleteModal = ref(false);
         :key="driver.id"
         @click="selectedDriver = driver.id"
       >
-        <span class="text-2xl font-medium">{{ driver.login }}</span>
+        <div class="flex flex-col gap-2">
+          <span class="text-2xl font-medium">{{ driver.login }}</span>
+          <span class="text-xl font-medium">{{
+            driver.truck.number || "Машина не назначена"
+          }}</span>
+        </div>
+
         <template #footer>
           <div class="flex gap-4">
             <UModal
@@ -163,6 +169,9 @@ const openDeleteModal = ref(false);
           </div>
         </template>
       </UCard>
+    </div>
+    <div v-else class="mt-8">
+      <span>Нет водителей</span>
     </div>
   </div>
 </template>

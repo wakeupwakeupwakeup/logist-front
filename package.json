@@ -18,17 +18,17 @@
     "@pinia/colada-nuxt": "0.0.4",
     "@pinia/nuxt": "0.9.0",
     "nuxt": "^3.14.1592",
-    "nuxt-tailwindcss4": "0.1.0",
+    "nuxt-tailwindcss4": "0.1.1",
     "pinia": "^2.3.0",
     "zod": "^3.24.0"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
-    "@nuxt/eslint": "^0.7.2",
+    "@nuxt/eslint": "^0.7.3",
     "@nuxtjs/tailwindcss": "^6.12.2",
     "@tailwindcss/postcss": "4.0.0-beta.6",
     "autoprefixer": "^10.4.20",
-    "eslint": "^9.15.0",
+    "eslint": "^9.17.0",
     "postcss": "^8.4.49",
     "tailwindcss": "4.0.0-beta.6",
     "typescript": "^5.7.2"

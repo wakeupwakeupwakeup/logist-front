@@ -9,11 +9,11 @@ definePageMeta({
 
 const USelect = resolveComponent("USelect");
 
-const { state, refresh } = useTruckRoute();
+const { state, refresh } = useTruckAddresses();
 
 const addressesCount = computed(
   () =>
-    state.value.data?.addresses.map((_, index) => ({
+    state.value.data?.map((_, index) => ({
       label: index,
       value: index,
     })) || []
@@ -47,10 +47,6 @@ const columns: TableColumn<TAddress>[] = [
     header: "График",
   },
   {
-    accessorKey: "truck",
-    header: "Машина",
-  },
-  {
     accessorKey: "contacts",
     header: "Контакты",
   },
@@ -60,7 +56,7 @@ const columns: TableColumn<TAddress>[] = [
     cell: ({ row }) =>
       h(USelect, {
         items: addressesCount.value,
-        defaultValue: row.original.priority,
+        value: row.original.priority || "0",
         "onUpdate:modelValue": (payload: number) =>
           changePriority(row.original.id, payload),
       }),
@@ -70,11 +66,8 @@ const columns: TableColumn<TAddress>[] = [
 
 <template>
   <div>
-    <div class="flex">
-      <h1>{{ state.data?.truck.number }}</h1>
-    </div>
     <UTable
-      :data="state.data?.addresses"
+      :data="state.data"
       :columns="columns"
       :loading="state.status === 'pending'"
       class="flex-1"

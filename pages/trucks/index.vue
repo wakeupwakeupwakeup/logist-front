@@ -31,15 +31,8 @@ const form = useTemplateRef("form");
 
 <template>
   <div>
-    <div class="flex gap-4 items-center justify-between mb-8">
-      <div class="flex gap-4 items-end">
-        <h1>Машины</h1>
-        <UIcon
-          v-if="trucks.status !== 'success'"
-          name="i-lucide-loader-circle"
-          class="animate-spin size-10"
-        />
-      </div>
+    <div class="flex gap-4 items-center justify-between">
+      <h1>Машины</h1>
       <UForm ref="form" :schema="schema" :state="formState" @submit="onSubmit">
         <UModal title="Добавить машину" :ui="{ footer: 'justify-end' }">
           <UButton label="Добавить" />
@@ -58,7 +51,7 @@ const form = useTemplateRef("form");
         </UModal>
       </UForm>
     </div>
-    <div v-if="trucks.status === 'success'" class="flex gap-4 flex-wrap">
+    <div v-if="trucks.status === 'success'" class="flex gap-4 flex-wrap mt-8">
       <UCard
         v-for="truck in trucks.data"
         :key="truck.id"
@@ -67,6 +60,9 @@ const form = useTemplateRef("form");
       >
         <span class="text-2xl font-medium">{{ truck.number }}</span>
       </UCard>
+    </div>
+    <div v-else class="mt-8">
+      <span>Нет машин</span>
     </div>
   </div>
 </template>

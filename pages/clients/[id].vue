@@ -97,7 +97,8 @@ async function onSubmit(event: FormSubmitEvent<any>) {
 
   try {
     await mutateAsync({
-      addressId: selectedAddress.value!,
+      target: "address",
+      targetId: selectedAddress.value!,
       truckId: event.data.number,
     });
     refresh();

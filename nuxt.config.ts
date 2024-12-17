@@ -12,7 +12,7 @@ export default defineNuxtConfig({
   pages: true,
   runtimeConfig: {
     public: {
-      apiBase: "https://wakeupwakeupwakeup-logist-back-8ace.twc1.net",
+      apiBase: "http://http://3954187-dm33703.twc1.net",
     },
   },
 
