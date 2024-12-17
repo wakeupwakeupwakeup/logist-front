@@ -102,7 +102,7 @@ async function handleFile(event: Event) {
           <UIcon name="i-lucide-info" />
           <template #content>
             <p class="p-2">
-              При загрузке клиента из таблицы (.xls), укажите наименование
+              При загрузке клиента из таблицы (.xlsx), укажите наименование
               клиента в названии листа
             </p>
           </template>
@@ -115,6 +115,8 @@ async function handleFile(event: Event) {
       :columns="columns"
       :loading="state.status === 'pending'"
       class="flex-1"
-    />
+    >
+      <template #empty> Нет записей </template>
+    </UTable>
   </div>
 </template>
